@@ -1,0 +1,24 @@
+.flow {	
+	float: right;
+	float: left;
+}
+
+.player-item {
+	display: block;
+	padding: 5px;
+	margin: 5px;
+	border: 1px solid black;
+}
+
+.btn {
+	padding: 5px;
+	margin: 5px;
+	color: white;
+	/*background: blue;*/
+}
+
+#list-players {
+	display: inline-block;
+	width: 250px;
+	border: 1px solid black;
+}
