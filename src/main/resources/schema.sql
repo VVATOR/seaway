@@ -11,13 +11,17 @@ create table sw_user (
     name varchar(255)    
 );
 
+create table sw_battlefield (
+	id_bf int auto_increment primary key not null,
+    id_g int not null,
+	id_u int not null,	
+    bf_status varchar(250)
+);
 
 
 create table sw_ship_position (
-	id_p int auto_increment primary key not null,
-    id_g int not null,
-	id_u int not null,
-	x int,
+	id_bf int auto_increment primary key not null,
+  	x int,
 	y int,
     field_status int
 );

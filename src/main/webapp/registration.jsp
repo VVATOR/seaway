@@ -14,7 +14,7 @@ ${message}
 	<h1>Registration</h1>
 
 
-	<form action="RegistrationController" method="get">
+	<form action="RegistrationController" method="post">
 
 		<input type="text" name="login" /> 
 		<input type="password" name="password" /> 

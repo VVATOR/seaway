@@ -86,15 +86,23 @@ public class DBAccessor {
 		return users;
 	}
 
-	public static void setWinner(int gameId, User winner) throws SQLException {
+	public static void setWin(int gameId, User userSurrenderId) throws SQLException {
 		Connection connection = DBConnection.getConnection();
-		final String sql = "UPDATE sw_game SET  winner = ? WHERE id_g=? status=?";
-		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setString(1, winner.getLogin());
-		ps.setInt(2, gameId);
-		ps.setString(3, GameStatus.END.toString());
-		ps.executeUpdate();
+		System.out.println(":::::::::::::");
+		System.out.println("::gameId::" + gameId);
+		System.out.println("::userSurrenderId:::" + userSurrenderId);
 
+		final String sql = 
+				"UPDATE sw_game SET "
+				+ " winner = (SELECT login FROM sw_user u WHERE u.id_u = sw_game.id_u2), "
+				+ " status = ? " 
+				+ "WHERE id_g=?";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		//ps.setInt(1, userSurrenderId.getId());	
+		ps.setString(1, GameStatus.END.toString());
+		ps.setInt(2, gameId);
+	
+		System.out.println("updated : " + ps.executeUpdate());
 	}
 
 	public static void verifyBattle(int gameId) throws SQLException {
@@ -117,11 +125,12 @@ public class DBAccessor {
 
 	public static List<Game> getListBattleOffersForUser(int id) throws SQLException {
 		Connection connection = DBConnection.getConnection();
-		final String sql = "SELECT * from sw_game WHERE (id_u1=? OR id_u2=?) and status=?";
+		final String sql = "SELECT * from sw_game WHERE (id_u1=? OR id_u2=?) and status=? and status!=?";
 		PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
 		ps.setInt(1, id);
 		ps.setInt(2, id);
 		ps.setString(3, GameStatus.CREATE_WAIT.toString());
+		ps.setString(4, GameStatus.END.toString());
 		ResultSet rs = ps.executeQuery();
 
 		List<Game> games = new ArrayList<>();
@@ -174,12 +183,13 @@ public class DBAccessor {
 		ps.execute();
 	}
 
-	public static  List<Game> listGamesHistory(int id) throws SQLException {
+	public static List<Game> listGamesHistory(int id) throws SQLException {
 		Connection connection = DBConnection.getConnection();
-		final String sql = "SELECT * from sw_game WHERE status=?";
+		final String sql = "SELECT * from sw_game WHERE (id_u1=? OR id_u2=?) AND status=?";
 		PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
 		ps.setInt(1, id);
-		ps.setString(2, GameStatus.END.toString());
+		ps.setInt(2, id);
+		ps.setString(3, GameStatus.END.toString());
 		ResultSet rs = ps.executeQuery();
 
 		List<Game> games = new ArrayList<>();

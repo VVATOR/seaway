@@ -18,15 +18,15 @@
 	<template:header />
 	<h1>Dashboard</h1>
 	
-	${user.id}
-	
+	${user.id}-**${current_user}**
+		
 	<div class="panel">
 		<div id="list-players">
 			<div class="panel">
 				<div class="panel-header">Gamers list:</div>
 				<c:forEach items="${listPlayers}" var="player">
 					<div class="player-item">${player.login}					
-						<form action="OfferController"  method="get">
+						<form action="OfferController"  method="post">
 							<input type="hidden" name="player1" value="${player.id}" />	
 							<input type="hidden" name="player2" value="${current_user.id}" />								
 						 	<input type="submit" name="action" value="CREATE_WAIT"/>
@@ -54,7 +54,7 @@
 				<div class="panel-header">Battle offers list:</div>
 				<c:forEach items="${listBattleOffirs}" var="offer">
 					<div class="player-item">${offer.id} 
-					<form action="OfferController"  method="get">
+					<form action="OfferController"  method="post">
 						<input type="hidden" name="game" value="${offer.id}" />	
 					    <input type="submit" name="action" value="VERIFY"/>
 						<input type="submit" name="action" value="REJECT"/>
@@ -72,9 +72,12 @@
 				<div class="panel-header">Battle active list:</div>
 				<c:forEach items="${listActiveGames}" var="game">
 					<div class="player-item">${game.id} 
-					<form action="OfferController"  method="get">
+					<form action="OfferController"  method="post">
+						<input type="hidden" name="userId" value="${current_user.id}" />	
 						<input type="hidden" name="game" value="${game.id}" />	
-					    <input type="submit" name="action" value="GO"/>						
+					    <input type="submit" name="action" value="PLAY"/>		
+					    <input type="submit" name="action" value="SURRENDER"/>		
+					    				
 					</form>					
 					</div>
 				</c:forEach>

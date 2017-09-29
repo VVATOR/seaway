@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
@@ -43,27 +43,12 @@ public class LoginController extends HttpServlet {
 
 		try {
 			User user = DBAccessor.login(login, password);
-
+			session.setAttribute("current_user",user);
 			if (user != new User()) {
 				session.setAttribute("current_user", user);
-				view = "/WEB-INF/views/dashboard.jsp";
+				view = "RootController";// "/WEB-INF/views/dashboard.jsp";
 			} else {
 				view = "/index.jsp";
-			}
-
-			try {
-				session.setAttribute("listPlayers", DBAccessor.getListUsers());
-				
-				session.setAttribute("listBattleOffirs", DBAccessor.getListBattleOffersForUser(user.getId()));
-				
-				session.setAttribute("listActiveGames", DBAccessor.listActiveGames(user.getId()));
-				
-				session.setAttribute("listGamesHistory", DBAccessor.listGamesHistory(user.getId()));
-				
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 		} catch (SQLException e) {

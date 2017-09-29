@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.gsu.seawar.GameStatus;
+import by.gsu.seawar.beans.User;
 import by.gsu.seawar.db.DBAccessor;
 import by.gsu.seawar.engine.Game;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -35,12 +36,12 @@ public class OfferController extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		GameStatus action = GameStatus.valueOf(request.getParameter("action").toUpperCase());
 
-		String view = "/WEB-INF/views/dashboard.jsp";
+		String view = "RootController"; // "/WEB-INF/views/dashboard.jsp";
 		try {
 			switch (action) {
 			case CREATE_WAIT:
@@ -55,10 +56,26 @@ public class OfferController extends HttpServlet {
 			case REJECT:		
 				DBAccessor.rejectBattle(Integer.parseInt(request.getParameter("game")));
 				break;
-
+			case SURRENDER:	
+				User userSurrenderId = (User) request.getSession().getAttribute("current_user");
+				System.out.println(userSurrenderId);
+				int gameId = Integer.parseInt(request.getParameter("game"));
+				DBAccessor.setWin(gameId, userSurrenderId);
+				break;	
+			case PLAY:	
+//				User userSurrenderId = (User) request.getSession().getAttribute("current_user");
+//				System.out.println(userSurrenderId);
+				boolean isFieldFill = (request.getParameter("game")!=null?true:false);
+				
+				if(!isFieldFill) {
+					//DBAccessor.get(gameForPlayId, userSurrenderId);
+					System.out.println("START WAR");
+				}else {
+					view = "/WEB-INF/views/battle/createField.jsp";
+				}
+				break;	
 			default:
 				throw new NotImplementedException(); // TODO
-
 			}
 		} catch (
 
