@@ -20,10 +20,10 @@ create table sw_battlefield (
 
 
 create table sw_ship_position (
-	id_bf int auto_increment primary key not null,
+	id_bf int,
   	x int,
 	y int,
-    field_status int
+    field_status varchar(250)
 );
 
 create table sw_game (

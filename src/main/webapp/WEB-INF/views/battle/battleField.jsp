@@ -6,10 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="static/styles/style-battlefield.css"/>
 </head>
 <body>
 
-	<h1>Create field</h1>
+
+<m:menu-top/>
+
+	<h1>BATTLE field</h1>
 
 table>(tr>td*10)*10
 
@@ -32,14 +36,28 @@ Enemy
 			<td>
 				<form action="" method="post">
 				<table>
-				<c:forEach begin="0" end="10" varStatus="row">
+				<thead>
+				<th></th>
+				<c:forEach begin="1" end="10" varStatus="colH">
+					<th>${colH.index}</th>
+				</c:forEach>
+				</thead>
+				<tbody>
+				<c:forEach begin="1" end="10" varStatus="row">
 				  	<tr>
-						<c:forEach begin="0" end="10" varStatus="column">
-							<td><input type="checkbox" name="item-${row.index}-${column.index}" /></td>
+				  		<c:forEach begin="1" end="10" varStatus="column">
+				  			<c:if test="${column.index eq 1}">
+								<td>&#${row.index+96};</td>
+							</c:if>
+							<td>
+								<input type="checkbox" class="checkbox" id="item-${row.index}-${column.index}" />
+							<label for="item-${row.index}-${column.index}"/>
+							</td>
 				<%-- 			<td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
 						</c:forEach>
 					</tr>
 				</c:forEach>
+				</tbody>
 				</table>					
 				<input type="hidden" name="action" value="PLAY"/>
 				<input type="hidden" name="game" value="${game.id}"/>
@@ -49,12 +67,26 @@ Enemy
 			</td>
 			<td></td>
 			<td>
-				<form action="" method="post">
+					<form action="" method="post">
 				<table>
-				<c:forEach begin="0" end="10" varStatus="row">
+				<thead>
+				<th></th>
+				<c:forEach begin="1" end="10" varStatus="colH">
+					<th>${colH.index}</th>
+				</c:forEach>
+				</thead>
+				<tbody>
+				<c:forEach begin="1" end="10" varStatus="row">
 				  	<tr>
-						<c:forEach begin="0" end="10" varStatus="column">
-							<td><input type="checkbox" name="item-${row.index}-${column.index}" /></td>
+				  		<c:forEach begin="1" end="10" varStatus="column">
+				  			<c:if test="${column.index eq 1}">
+								<td>&#${row.index+96};</td>
+							</c:if>
+							<td>
+<%-- 							<input type="checkbox" name="item-${row.index}-${column.index}" /> --%>
+							<input type="checkbox" class="checkbox" id="checkbox-item-${row.index}-${column.index}" />
+							<label for="checkbox-item-${row.index}-${column.index}"/>
+							</td>
 				<%-- 			<td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
 						</c:forEach>
 					</tr>
@@ -69,9 +101,6 @@ Enemy
 		</tr>
 	</tbody>
 </table>
-
-
-
 
 
 </body>

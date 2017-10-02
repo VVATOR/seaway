@@ -3,6 +3,7 @@
 
 <%@taglib prefix="template" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="m" tagdir="/WEB-INF/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,15 +12,19 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="static/styles/style.css" />
+<script src="static/field_random.js"></script>
+
 
 </head>
 <body>
+	<m:menu-top/>
 
-	<template:header />
 	<h1>Dashboard</h1>
 	
+	
 	${user.id}-**${current_user}**
-		
+		<button type="button" onclick="showNewOffers();">Click Me!</button>
+
 	<div class="panel">
 		<div id="list-players">
 			<div class="panel">
@@ -38,7 +43,7 @@
 		
 		<div class="flow" />
 
-		<div id="list-player-games-history">
+		<div id="list-player-games-history"> 
 			<div class="panel">
 				<div class="panel-header">Your Games history list:</div>
 				<c:forEach items="${listGamesHistory}" var="game">

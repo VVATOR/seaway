@@ -7,7 +7,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class BattleField {
 
     private List<Ship> ships;
-    private List<Shot> shots;
+    private List<Point> shots;
 
     public BattleField() {
         super();
