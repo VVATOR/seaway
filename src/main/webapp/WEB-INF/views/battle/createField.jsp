@@ -52,7 +52,7 @@ table>(tr>(td>input[type="checkbox" name="item-$"])*10)*10
 							<td>
 				<input type="checkbox" name="fill"  class="checkbox field-position" value="${row.index*10 + column.index}" id="item-${row.index}-${column.index}" />
 <%-- 				${row.index*10 + column.index} --%>
-				<label for="item-${row.index}-${column.index}"/>
+				<label for="item-${row.index}-${column.index}" />
 				
 	<%-- 			<td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
 				</td>

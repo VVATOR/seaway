@@ -16,6 +16,7 @@
 <m:menu-top/>
 <button type="button" onclick="inactivateCheckboxes();">inactivateCheckboxes!</button>
 <button type="button" onclick="activateCheckboxes();">activateCheckboxes!</button>
+<button type="button" onclick="listener();">activateCheckboxes!</button>
 
 	<h1>BATTLE field</h1>
 
