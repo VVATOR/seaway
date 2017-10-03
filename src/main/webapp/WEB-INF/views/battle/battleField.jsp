@@ -7,11 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="static/styles/style-battlefield.css"/>
+<link rel="stylesheet" type="text/css" href="static/styles/style.css" />
+<script src="static/field_random.js"></script>
 </head>
 <body>
 
 
 <m:menu-top/>
+<button type="button" onclick="inactivateCheckboxes();">inactivateCheckboxes!</button>
+<button type="button" onclick="activateCheckboxes();">activateCheckboxes!</button>
 
 	<h1>BATTLE field</h1>
 
@@ -50,10 +54,10 @@ Enemy
 								<td>&#${row.index+96};</td>
 							</c:if>
 							<td>
-								<input type="checkbox" class="checkbox" id="item-${row.index}-${column.index}" />
+								<input type="checkbox" class="checkbox field-position" id="item-${row.index}-${column.index}" />
 							<label for="item-${row.index}-${column.index}"/>
 							</td>
-				<%-- 			<td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
+							<%-- <td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
 						</c:forEach>
 					</tr>
 				</c:forEach>
@@ -84,9 +88,9 @@ Enemy
 							</c:if>
 							<td>
 <%-- 							<input type="checkbox" name="item-${row.index}-${column.index}" /> --%>
-							<input type="checkbox" class="checkbox" id="checkbox-item-${row.index}-${column.index}" />
+							<input type="checkbox" class="checkbox field-position" id="checkbox-item-${row.index}-${column.index}" />
 							<label for="checkbox-item-${row.index}-${column.index}"/>
-							</td>
+			 				</td>
 				<%-- 			<td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
 						</c:forEach>
 					</tr>
