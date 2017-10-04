@@ -57,6 +57,7 @@ public class BattleController extends HttpServlet {
             List<Point> positions = new ArrayList<>();
             
             //String[] fill = request.getParameterValues("fill");
+            
             String[] fill = {"11","20","50","60"};
             for (String numberFillField : fill) {
 

@@ -2,17 +2,20 @@ package by.gsu.seawar.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import by.gsu.seawar.GameStatus;
 import by.gsu.seawar.beans.User;
 import by.gsu.seawar.db.DBAccessor;
 import by.gsu.seawar.engine.Game;
+import by.gsu.seawar.engine.battle.Point;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -70,14 +73,15 @@ public class OfferController extends HttpServlet {
 				
 				User userPlay = (User) request.getSession().getAttribute("current_user");
 				int userId = userPlay.getId();
-				if (DBAccessor.fieldIsExist(game, userId).size() > 0) {
+				List<Point> listUserPosition = DBAccessor.fieldIsExist(game, userId);
+				if (listUserPosition.size() > 0) {
 					// DBAccessor.getBattleFieldByUserID(g, userPlay);
 
 					// view = "/WEB-INF/views/battle/battleField.jsp";
-
+					HttpSession session = request.getSession();
+					session.setAttribute("userFieldPositions",listUserPosition);
 					view = "/BattleController";
 				} else {
-
 					view = "/WEB-INF/views/battle/createField.jsp";
 				}
 				break;
