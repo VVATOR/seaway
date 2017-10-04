@@ -5,6 +5,7 @@ table{
 }
 
 
+
 /* input[type="checkbox"]:checked { */
 /* 	padding: 10px; */
 /* 	margin: 10px; */
@@ -82,6 +83,28 @@ table{
 .checkbox:checked + label:before {
   background: #9FD468;
 }
+
+.NO.checkbox:checked + label:before{
+  background: red;
+  cursor: s-resize;
+}
+
+.YES.checkbox:checked + label:before{
+  background: none;
+  content: '*';
+  margin-top: 7px;
+  text-align: center;
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: none; 
+ /* background: #CDD1DA;*/
+  color white;
+  box-shadow: none;
+}
+
 /* Сдвигаем переключатель чекбокса, когда он включен. */
 /* .checkbox:checked + label:after { */
 /*   left: 26px; */

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@ taglib prefix="m" tagdir="/WEB-INF/tags" %>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,9 +11,9 @@
 <link rel="stylesheet" type="text/css" href="static/styles/style.css" />
 <script src="static/field_random.js"></script>
 </head>
-<body>
-
-
+<body onload="addListener()">
+ 
+<%-- <m:surrender/> --%>
 <m:menu-top/>
 <button type="button" onclick="inactivateCheckboxes();">inactivateCheckboxes!</button>
 <button type="button" onclick="activateCheckboxes();">activateCheckboxes!</button>
@@ -20,9 +21,8 @@
 
 	<h1>BATTLE field</h1>
 
-table>(tr>td*10)*10
-
-table>(tr>(td>input[type="checkbox" name="$""])*10)*10
+<input type="text" id="gameId" value="${game}"/>
+<input type="text" id="current_user" value="${current_user.id}"/>
 
 table>(tr>(td>input[type="checkbox" name="item-$"])*10)*10
 
@@ -55,8 +55,10 @@ Enemy
 								<td>&#${row.index+96};</td>
 							</c:if>
 							<td>
-								<input type="checkbox" class="checkbox field-position" id="item-${row.index}-${column.index}" />
-							<label for="item-${row.index}-${column.index}"/>
+								<input type="checkbox" class="checkbox field-position" id="item-${row.index * 10 + column.index}" 
+								value="${row.index * 10 + column.index}"
+								/>
+								<label for="item-${row.index * 10 + column.index}"/>
 							</td>
 							<%-- <td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
 						</c:forEach>
@@ -64,10 +66,10 @@ Enemy
 				</c:forEach>
 				</tbody>
 				</table>					
-				<input type="hidden" name="action" value="PLAY"/>
-				<input type="hidden" name="game" value="${game.id}"/>
-				<input type="hidden" name="user" value="${current_user.id}"/>
-				<input type="submit" value="PLAY"/>
+<!-- 				<input type="hidden" name="action" value="PLAY"/> -->
+<%-- 				<input type="hidden" name="game" value="${game.id}"/> --%>
+<%-- 				<input type="hidden" name="user" value="${current_user.id}"/> --%>
+<!-- 				<input type="submit" value="PLAY"/> -->
 				</form>
 			</td>
 			<td></td>
@@ -89,18 +91,14 @@ Enemy
 							</c:if>
 							<td>
 <%-- 							<input type="checkbox" name="item-${row.index}-${column.index}" /> --%>
-							<input type="checkbox" class="checkbox field-position" id="checkbox-item-${row.index}-${column.index}" />
-							<label for="checkbox-item-${row.index}-${column.index}"/>
+							<input type="checkbox" class="checkbox field-position" id="checkbox-item-${row.index * 10 + column.index}" />
+							<label for="checkbox-item-${row.index * 10 + column.index}"/>
 			 				</td>
 				<%-- 			<td><input type="checkbox" name="item-${row.index}-${column.index}" />item-${row.index}-${column.index} </td> --%>			
 						</c:forEach>
 					</tr>
 				</c:forEach>
 				</table>					
-				<input type="hidden" name="action" value="PLAY"/>
-				<input type="hidden" name="game" value="${game.id}"/>
-				<input type="hidden" name="user" value="${current_user.id}"/>
-				<input type="submit" value="PLAY"/>
 				</form>
 			</td>
 		</tr>

@@ -13,6 +13,7 @@ import by.gsu.seawar.GameStatus;
 import by.gsu.seawar.beans.Gamer;
 import by.gsu.seawar.beans.User;
 import by.gsu.seawar.constants.EnemyFieldStatus;
+import by.gsu.seawar.constants.FireStatus;
 import by.gsu.seawar.engine.Game;
 import by.gsu.seawar.engine.battle.Point;
 
@@ -68,11 +69,12 @@ public class DBAccessor {
         return user;
     }
 
-    public static List<User> getListUsers() throws SQLException {
+    public static List<User> getListUsers(int currentUserId) throws SQLException {
         Connection connection = DBConnection.getConnection();
-        final String sql = "SELECT * from sw_user";
+        final String sql = "SELECT * from sw_user WHERE id_u<>?";
         PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
         // TODO ps.close()
+        ps.setInt(1, currentUserId);
         ResultSet rs = ps.executeQuery();
 
         List<User> users = new ArrayList<>();
@@ -243,9 +245,47 @@ public class DBAccessor {
             }
        
         connection.commit();
-        connection.close();   //TODO anywhere
+      //  connection.close();   //TODO anywhere
         System.out.println("qqqqqqqqqq");
     }
+
+	public static FireStatus fire(int gameId, int userId, Point point) throws SQLException {
+		Connection connection = DBConnection.getConnection();
+        final String sql = "SELECT * FROM sw_battlefield b INNER JOIN sw_ship_position p ON (b.id_bf = p.id_bf)"
+        		+ " WHERE id_g=? AND id_u=? AND x=? AND y=?;";
+        PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
+        ps.setInt(1, gameId);
+        ps.setInt(2, userId);
+        ps.setInt(3, point.getX());
+        ps.setInt(4, point.getY());
+        ResultSet rs = ps.executeQuery();
+        
+        if(rs.next()){
+        	return FireStatus.NO;
+        }
+
+		return FireStatus.YES;
+	}
+
+	public static List<Point> fieldIsExist(int gameId, int userId) throws SQLException {
+		List<Point> points= new ArrayList<>();
+		Connection connection = DBConnection.getConnection();
+        final String sql = "SELECT * FROM sw_battlefield b INNER JOIN sw_ship_position p ON (b.id_bf = p.id_bf)"
+        		+ " WHERE id_g=? AND id_u=?";
+        PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
+        ps.setInt(1, gameId);
+        ps.setInt(2, userId);
+      
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+        	Point point  = new Point(rs.getInt("x"), rs.getInt("y"));
+        	points.add(point);
+        
+        }
+	
+		return points;
+	}
 
     /*
      * public boolean fire(final int x, final int y) throws SQLException { final String sql = "SELECT * from sw_ship_position WHERE login = ? AND"; PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql); ps.setString(0, login);

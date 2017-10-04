@@ -1,21 +1,27 @@
-document.addEventListener("DOMContentLoaded", addListener);
-
 function addListener() {
 
-	var checkbox = document.querySelector("input[type=checkbox].field-position");
+	var checkbox = document
+			.querySelectorAll("input[type=checkbox].field-position");
 
-	checkbox.addEventListener('change', function() {
-		console.log("aaaaaaaasssssssss");
-		alert("ay");
-		if (this.checked) {
-			alert("fire")
-		}
+	checkbox.forEach(function(element) {
+
+		element.addEventListener('change', function() {
+			console.log("aaaaaaaasssssssss");
+			alert(this.value);
+			if (this.checked) {
+				alert("fire");
+				fire(this);
+			}
+		});
+
+		// element.checked = false;
+		console.log(element);
 	});
 
 	console.log("aaaaaaaaaa");
 }
 
-function fire(point) {
+function fire1(point) {
 
 	const xhr = new XMLHttpRequest();
 	xhr.open('POST', 'FireController?point=' + point);
@@ -30,6 +36,46 @@ function fire(point) {
 		}
 	};
 }
+function fire(point) {
+
+	const xhr = new XMLHttpRequest();
+	var gameId = document.getElementById("gameId").value;
+	console.log(gameId+"---------");
+	var current_userId = document.getElementById("current_user").value;
+	xhr.open('POST', 'FireController?point=' + point.value + "&gameId=" + gameId + "&userId=" + current_userId);
+	xhr.send(); 
+	xhr.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			point.innerHTML = "1" + point.innerHTML;
+			point.innerHTML = "1" + point.innerHTML;
+			console.log( xhr.responseText);
+			point.className += " " + xhr.responseText;
+			point.disabled = true;
+		} else {
+
+
+		}
+	};
+}
+//function fire(point) {
+//
+//	const xhr = new XMLHttpRequest();
+//	
+//	xhr.open('POST', 'FireController?point=' + point.value+"#gameId=${game.id_g}#user=${current_user.id_u}");
+//	xhr.send();
+//	xhr.onreadystatechange = function() {
+//		if (this.readyState == 4 && this.status == 200) {
+//			point.innerHTML = "1" + point.innerHTML;
+//			point.innerHTML = "1" + point.innerHTML;
+//			console.log( xhr.responseText);
+//			point.className += " " + xhr.responseText;
+//			point.disabled = true;
+//		} else {
+//
+//
+//		}
+//	};
+//}
 
 function fillFieldRandom(countRandomPosition) {
 	clearAll();

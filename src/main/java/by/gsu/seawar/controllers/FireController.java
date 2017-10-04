@@ -2,6 +2,7 @@ package by.gsu.seawar.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,19 +33,34 @@ public class FireController extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		System.out.println(request.getParameter("point"));
+		int pointParam = Integer.parseInt(request.getParameter("point"));
 		
-	/*	int gameId = ;
-		int userId = ;
+		System.out.println(request.getParameter("gameId")+"**************");
+		System.out.println(request.getParameter("userId")+"**************");
+		int gameId =  Integer.parseInt(request.getParameter("gameId"));
+		int userId =  Integer.parseInt(request.getParameter("userId"));
+
+
+		int x = pointParam/10;
+		int y = pointParam % 10;
+		System.out.println(x+"**************");
+		System.out.println(y+"**************");
 		
-		int x = ;
-		int y = ;
 		Point point = new Point(x, y);
 	
-		FireStatus status = DBAccessor.fire(gameId,userId,point);
-		PrintWriter out = response.getWriter();
-		out.println(status.toString());		*/
+		 FireStatus status = FireStatus.ERROR;
+		 PrintWriter out = response.getWriter();
+		try {
+			status = DBAccessor.fire(gameId,userId,point);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		//FireStatus status = FireStatus.YES;
+		
+		out.println(status.toString());		
 	}
 
 }

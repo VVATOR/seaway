@@ -78,13 +78,12 @@
 				<c:forEach items="${listActiveGames}" var="game">
 					<div class="player-item">${game.id} 
 					<form action="OfferController"  method="post">
-						<input type="hidden" name="userId" value="${current_user.id}" />	
+<%-- 						<input type="hidden" name="userId" value="${current_user.id}" />	 --%>
 						<input type="hidden" name="game" value="${game.id}" />	
 					    <input type="submit" name="action" value="PLAY"/>		
-					    <input type="submit" name="action" value="SURRENDER"/>		
-					    				
+					    <input type="submit" name="action" value="SURRENDER"/>							    				
 					</form>					
-					</div>
+					</div> 
 				</c:forEach>
 			</div>
 		</div>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import by.gsu.seawar.GameStatus;
 import by.gsu.seawar.beans.User;
 import by.gsu.seawar.db.DBAccessor;
 import by.gsu.seawar.engine.battle.Point;
@@ -39,20 +40,24 @@ public class BattleController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        BattleAction action = BattleAction.valueOf(request.getParameter("action"));
+    	// BattleAction action = BattleAction.valueOf(request.getParameter("action"));
+    	 GameStatus action = GameStatus.valueOf(request.getParameter("action"));
 
         String view = view = "/WEB-INF/views/battle/battleField.jsp";
         switch (action) {
-        case BATTLE_CREATE:
+        case PLAY:
             // TODO Auto-generated method stub
             int g = Integer.parseInt(request.getParameter("game"));
+            
             User userPlay = (User) request.getSession().getAttribute("current_user");
 
             System.out.println("aaaaaaaaaaa");
             System.out.println("START WAR");
 
             List<Point> positions = new ArrayList<>();
-            String[] fill = request.getParameterValues("fill");
+            
+            //String[] fill = request.getParameterValues("fill");
+            String[] fill = {"11","20","50","60"};
             for (String numberFillField : fill) {
 
                 System.out.print(numberFillField + ", ");
@@ -73,7 +78,7 @@ public class BattleController extends HttpServlet {
         default:
             break;
         }
-
+   
         request.getRequestDispatcher(view).forward(request, response);
 
     }

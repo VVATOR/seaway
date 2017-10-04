@@ -49,7 +49,7 @@ public class RootController extends HttpServlet {
 			view = "/WEB-INF/views/dashboard.jsp";
 
 			try {
-				session.setAttribute("listPlayers", DBAccessor.getListUsers());
+				session.setAttribute("listPlayers", DBAccessor.getListUsers(user.getId()));
 
 				session.setAttribute("listBattleOffirs", DBAccessor.getListBattleOffersForUser(user.getId()));
 
