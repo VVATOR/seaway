@@ -36,16 +36,16 @@ public class FireController extends HttpServlet {
 		System.out.println(request.getParameter("point"));
 		int pointParam = Integer.parseInt(request.getParameter("point"));
 		
-		System.out.println(request.getParameter("gameId")+"**************");
-		System.out.println(request.getParameter("userId")+"**************");
+		System.out.println(request.getParameter("gameId")+"*g*************");
+		System.out.println(request.getParameter("userId")+"*u*************");
 		int gameId =  Integer.parseInt(request.getParameter("gameId"));
 		int userId =  Integer.parseInt(request.getParameter("userId"));
 
 
 		int x = pointParam/10;
 		int y = pointParam % 10;
-		System.out.println(x+"**************");
-		System.out.println(y+"**************");
+		System.out.println(x+"*x*************");
+		System.out.println(y+"*y*************");
 		
 		Point point = new Point(x, y);
 	

@@ -58,7 +58,7 @@ public class BattleController extends HttpServlet {
             
             //String[] fill = request.getParameterValues("fill");
             
-            String[] fill = {"11","20","50","60"};
+            String[] fill = {"11","21","53","33"};
             for (String numberFillField : fill) {
 
                 System.out.print(numberFillField + ", ");
