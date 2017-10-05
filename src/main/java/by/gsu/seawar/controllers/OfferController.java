@@ -64,26 +64,36 @@ public class OfferController extends HttpServlet {
 				DBAccessor.setWin(gameId, userSurrenderId);
 				break;
 			case PLAY:
+				System.out.println("play vva");
 				// User userSurrenderId = (User)
 				// request.getSession().getAttribute("current_user");
 				// System.out.println(userSurrenderId);
 				boolean isFieldFill = (request.getParameter("game") != null ? true : false);
 				int game = Integer.parseInt(request.getParameter("game"));
-				request.setAttribute("game", Integer.parseInt(request.getParameter("game")));
-				
+				//request.setAttribute("game", Integer.parseInt(request.getParameter("game")));
+				System.out.println("action vva 1 gameId "+game+" - r: "+request.getParameter("game"));
 				User userPlay = (User) request.getSession().getAttribute("current_user");
 				int userId = userPlay.getId();
 				List<Point> listUserPosition = DBAccessor.fieldIsExist(game, userId);
+				System.out.println("action vva 2");
 				if (listUserPosition.size() > 0) {
 					// DBAccessor.getBattleFieldByUserID(g, userPlay);
-
+					System.out.println("action vva 3");
 					// view = "/WEB-INF/views/battle/battleField.jsp";
 					HttpSession session = request.getSession();
 					session.setAttribute("userFieldPositions",listUserPosition);
 					view = "/BattleController";
+					System.out.println("action vva BattleController");
+					
 				} else {
 					view = "/WEB-INF/views/battle/createField.jsp";
+					
+				//	DBAccessor.createFieldByUser(userId, positions);
+					System.out.println("action vva createField");
+					
 				}
+				
+				System.out.println("end vva");
 				break;
 			default:
 				throw new NotImplementedException(); // TODO

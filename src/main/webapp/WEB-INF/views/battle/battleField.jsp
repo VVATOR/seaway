@@ -21,7 +21,7 @@
 
 	<h1>BATTLE field</h1>
 
-<input type="text" id="gameId" value="${game}"/>
+<input type="text" id="gameId" value="${param.game}"/>
 <input type="text" id="current_user" value="${current_user.id}"/>
 
 table>(tr>(td>input[type="checkbox" name="item-$"])*10)*10
@@ -90,6 +90,12 @@ Enemy
 								<td>&#${row.index+96};</td>
 							</c:if>
 							<td>
+								<c:forEach items="${currentUserListPositions}" var="pos">
+								<c:if test="${((pos.y*10)+pos.x) eq ((row.index * 10) + column.index)}">
+								lol
+								</c:if>
+								</c:forEach>
+							
 <%-- 							<input type="checkbox" name="item-${row.index}-${column.index}" /> --%>
 							<input type="checkbox" class="checkbox field-position" id="checkbox-item-${row.index * 10 + column.index}" />
 							<label for="checkbox-item-${row.index * 10 + column.index}"/>
@@ -105,6 +111,21 @@ Enemy
 	</tbody>
 </table>
 
+aaa
+<c:forEach items="${currentUserListPositions}" var="pos">
+${((pos.y*10)+pos.x)}
+<c:if test="${((pos.y*10)+pos.x) eq row.index * 10 + column.index}">
+lol
+</c:if>
+</c:forEach>
+
+
+<c:forEach items="${positions}" var="posi">
+${posi}
+<c:if test="${posi}">
+lol
+</c:if>
+</c:forEach>
 
 </body>
 </html>

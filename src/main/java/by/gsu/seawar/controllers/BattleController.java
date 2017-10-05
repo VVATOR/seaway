@@ -56,9 +56,9 @@ public class BattleController extends HttpServlet {
 
             List<Point> positions = new ArrayList<>();
             
-            //String[] fill = request.getParameterValues("fill");
+            String[] fill = request.getParameterValues("fill");            
+            //String[] fill = {"11","21","53","33"};
             
-            String[] fill = {"11","21","53","33"};
             for (String numberFillField : fill) {
 
                 System.out.print(numberFillField + ", ");
@@ -66,19 +66,33 @@ public class BattleController extends HttpServlet {
                 int y = Integer.parseInt(numberFillField) / 10;
                 positions.add(new Point(x, y));
             }
+            
             System.out.println("\n" + positions);
 
             try {
                 DBAccessor.createFieldByUser(g, userPlay.getId(), positions);
+                
+                List<Point> currentUserListPositions =  DBAccessor.fieldIsExist(g, userPlay.getId());
+                
+                System.out.println("*********"+currentUserListPositions);
+                
+                request.setAttribute("currentUserListPositions", currentUserListPositions);
+             //   request.setAttribute("enemy", DBAccessor.getEnemyUserByGame(g,userPlay.getId()));
+                
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                e.printStackTrace(); 
             }
+            
+         
+            
             break;
 
         default:
             break;
         }
+        
+        
    
         request.getRequestDispatcher(view).forward(request, response);
 

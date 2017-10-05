@@ -287,6 +287,8 @@ public class DBAccessor {
 		return points;
 	}
 
+	
+	
     /*
      * public boolean fire(final int x, final int y) throws SQLException { final String sql = "SELECT * from sw_ship_position WHERE login = ? AND"; PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql); ps.setString(0, login);
      * ps.setString(1, password); ResultSet rs = ps.executeQuery();
