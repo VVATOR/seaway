@@ -60,7 +60,7 @@ table>(tr>(td>input[type="checkbox" name="item-$"])*10)*10
 		</tr>
 	</c:forEach>
 	</table>					
-	<input type="hidden" name="action" value="PLAY"/>
+	<input type="hidden" name="action" value="CREATE_PLAY"/>
 	<input type="hidden" name="userId" value="${current_user.id}"/>
 	<input type="hidden" name="game" value="${param.game}"/>${param.game}	
 	<input type="submit" value="PLAY"/>

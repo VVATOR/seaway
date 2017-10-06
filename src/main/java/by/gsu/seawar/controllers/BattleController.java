@@ -70,7 +70,7 @@ public class BattleController extends HttpServlet {
             System.out.println("\n" + positions);
 
             try {
-                DBAccessor.createFieldByUser(g, userPlay.getId(), positions);
+                //DBAccessor.createFieldByUser(g, userPlay.getId(), positions);
                 
                 List<Point> currentUserListPositions =  DBAccessor.fieldIsExist(g, userPlay.getId());
                 
