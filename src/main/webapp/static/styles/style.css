@@ -1,6 +1,20 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
 .menu-top {
+	padding: 5px;
 	display: block;
-	background: blask;
+	color: white;
+	min-height 50px;
+	background: orange;
+}
+
+.menu-top li {
+	list-style: none;
+	display: inline-block;
+	float: left;
 }
 
 .flow {

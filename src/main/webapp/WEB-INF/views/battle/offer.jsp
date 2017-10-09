@@ -11,7 +11,7 @@
 	<h1>Offer to battle</h1>
 	
 	
-	<form action="OfferController" method="get">		
+	<form action="CommandController" method="get">		
 		<input type="hidden" name="game" value="${game}" />	
 	    <input type="submit" name="action" value="verify"/>
 		<input type="submit" name="action" value="reject"/>

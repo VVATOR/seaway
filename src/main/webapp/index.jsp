@@ -1,1 +1,1 @@
-<jsp:forward page="/RootController"></jsp:forward>
+<jsp:forward page="/authorisation.jsp" />

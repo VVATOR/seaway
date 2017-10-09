@@ -2,6 +2,7 @@ package by.gsu.seawar.engine.battle;
 
 import java.util.List;
 
+import by.gsu.seawar.beans.Point;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class BattleField {

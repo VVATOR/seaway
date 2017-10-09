@@ -4,7 +4,16 @@
 
 
 <div class="menu-top">
-	<div id="login">${current_user.login}</div>
+	<ul>
+		<li><div>User: ${current_user.login}</div></li>
+		<li>
+			<form action="CommandController" method="post">
+				<input type="submit" name="action" value="LOGOUT" class="btn" />
+			</form>
+	    </li>
+	    <li>User: ${current_user.login}</li>
+	</ul>
 
-	<m:header />
+
+	
 </div>

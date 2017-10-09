@@ -16,10 +16,10 @@ ${message}
 
 
 	<h1>Authorisation</h1>
-	<form action="LoginController" method="post">
+	<form action="CommandController" method="post">
 		<input type="text" name="login" placeholder="login"/> 
 		<input type="password"	name="password" placeholder="password"/>
-		<input type="submit" value="sign in" class="btn"/>
+		<input type="submit" name="action" value="LOGIN" class="btn"/>
 	</form>
 
 
