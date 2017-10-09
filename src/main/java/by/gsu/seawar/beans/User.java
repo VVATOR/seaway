@@ -7,7 +7,7 @@ public class User extends Model {
     private String password;
 
     public User() {
-        super();
+        this("","","");
     }
 
     public User(String name, String login, String password) {

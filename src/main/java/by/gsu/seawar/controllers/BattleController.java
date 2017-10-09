@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.gsu.seawar.GameStatus;
-import by.gsu.seawar.beans.User;
+import by.gsu.seawar.beans.*;
+import by.gsu.seawar.constants.GameStatus;
 import by.gsu.seawar.db.DBAccessor;
-import by.gsu.seawar.engine.battle.Point;
 
 /**
  * Servlet implementation class BattleController
@@ -31,69 +30,28 @@ public class BattleController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    enum BattleAction {
-        BATTLE_CREATE
-    }
-
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("BattleController");
 
-    	// BattleAction action = BattleAction.valueOf(request.getParameter("action"));
-    	 GameStatus action = GameStatus.valueOf(request.getParameter("action"));
+        String view = "/WEB-INF/views/battle/battleField.jsp";
 
-        String view = view = "/WEB-INF/views/battle/battleField.jsp";
-        switch (action) {
-        case PLAY:
-            // TODO Auto-generated method stub
-            int g = Integer.parseInt(request.getParameter("game"));
-            
-            User userPlay = (User) request.getSession().getAttribute("current_user");
+        int g = Integer.parseInt(request.getParameter("game"));
 
-            System.out.println("aaaaaaaaaaa");
-            System.out.println("START WAR");
+        User userPlay = (User) request.getSession().getAttribute("current_user");
 
-            List<Point> positions = new ArrayList<>();
-            
-            String[] fill = request.getParameterValues("fill");            
-            //String[] fill = {"11","21","53","33"};
-            
-            for (String numberFillField : fill) {
+        System.out.println("START WAR");
 
-                System.out.print(numberFillField + ", ");
-                int x = Integer.parseInt(numberFillField) % 10;
-                int y = Integer.parseInt(numberFillField) / 10;
-                positions.add(new Point(x, y));
-            }
-            
-            System.out.println("\n" + positions);
-
-            try {
-                //DBAccessor.createFieldByUser(g, userPlay.getId(), positions);
-                
-                List<Point> currentUserListPositions =  DBAccessor.fieldIsExist(g, userPlay.getId());
-                
-                System.out.println("*********"+currentUserListPositions);
-                
-                request.setAttribute("currentUserListPositions", currentUserListPositions);
-             //   request.setAttribute("enemy", DBAccessor.getEnemyUserByGame(g,userPlay.getId()));
-                
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace(); 
-            }
-            
-         
-            
-            break;
-
-        default:
-            break;
+        
+        try {
+            request.setAttribute("enemy", DBAccessor.getUserById(DBAccessor.getEnemyId(g, userPlay.getId())));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         
-        
-   
         request.getRequestDispatcher(view).forward(request, response);
 
     }

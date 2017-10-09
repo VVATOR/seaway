@@ -84,12 +84,12 @@ table{
   background: #9FD468;
 }
 
-.NO.checkbox:checked + label:before{
+.KILLED.checkbox:checked + label:before{
   background: red;
   cursor: s-resize;
 }
 
-.YES.checkbox:checked + label:before{
+.EMPTY.checkbox:checked + label:before{
   background: none;
   content: '*';
   margin-top: 7px;

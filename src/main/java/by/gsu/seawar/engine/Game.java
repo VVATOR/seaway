@@ -2,9 +2,8 @@ package by.gsu.seawar.engine;
 
 import java.sql.Date;
 
-import by.gsu.seawar.GameStatus;
 import by.gsu.seawar.beans.Gamer;
-import by.gsu.seawar.beans.User;
+import by.gsu.seawar.constants.GameStatus;
 import by.gsu.seawar.engine.battle.BattleField;
 
 public class Game {

@@ -10,6 +10,27 @@
 <link rel="stylesheet" type="text/css" href="static/styles/style-battlefield.css"/>
 <link rel="stylesheet" type="text/css" href="static/styles/style.css" />
 <script src="static/field_random.js"></script>
+<style>
+div#lock {
+display:block;
+position:absolute;
+z-index:1000;
+    height:100%;
+    width:100%;
+    opacity:0.5;
+    background:#f00;
+    /*color:#fff;*/
+    
+    
+}
+body, html { 
+    width: 100%;
+    height: 100%;
+}
+#lockBlock{
+	display:none;
+}
+</style>
 </head>
 <body onload="addListener()">
  
@@ -17,8 +38,8 @@
 <m:menu-top/>
 <button type="button" onclick="inactivateCheckboxes();">inactivateCheckboxes!</button>
 <button type="button" onclick="activateCheckboxes();">activateCheckboxes!</button>
-<button type="button" onclick="listener();">activateCheckboxes!</button>
-
+<button type="button" onclick="listener();">listener!</button>
+<div id="lockBlock">НЕ ТВОЙ ХОД</div>
 	<h1>BATTLE field</h1>
 
 <input type="text" id="gameId" value="${param.game}"/>
@@ -31,7 +52,7 @@ Enemy
 <table>
 	<thead>
 		<tr>
-			<th>ENEMY</th>
+			<th>ENEMY (${enemy.login})</th>
 			<th width="100px"></th>
 			<th>YOUR</th>
 		</tr>
@@ -55,7 +76,14 @@ Enemy
 								<td>&#${row.index+96};</td>
 							</c:if>
 							<td>
-								<input type="checkbox" class="checkbox field-position" id="item-${row.index * 10 + column.index}" 
+							<c:forEach items="${enemyUserListPositions}" var="pos">
+								<c:if test="${((pos.y*10)+pos.x) eq ((row.index * 10) + column.index)}">
+								${pos.status}
+								</c:if>
+								</c:forEach>
+							
+							${row.index * 10 + column.index}
+							<input type="checkbox" class="checkbox field-position" id="item-${row.index * 10 + column.index}" 
 								value="${row.index * 10 + column.index}"
 								/>
 								<label for="item-${row.index * 10 + column.index}"/>
@@ -92,7 +120,7 @@ Enemy
 							<td>
 								<c:forEach items="${currentUserListPositions}" var="pos">
 								<c:if test="${((pos.y*10)+pos.x) eq ((row.index * 10) + column.index)}">
-								lol
+								${pos.status}
 								</c:if>
 								</c:forEach>
 							
